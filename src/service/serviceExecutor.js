@@ -7,8 +7,9 @@ export default class ServiceExecutor {
 
   execute(service) {
     const { method, url } = service;
-    fetch(url, {
+    fetch(this.host + url, {
       method,
+      mode: "cors",
     })
       .then((rawResponse) => this.onSuccess(rawResponse))
       .catch((exception) => {
