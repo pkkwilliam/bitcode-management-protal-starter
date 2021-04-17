@@ -15,8 +15,8 @@ import {
 import CIcon from "@coreui/icons-react";
 
 import MainChartExample from "../charts/MainChartExample.js";
-import ImageDragAndDrop from "../../common/imageDragAndDrop";
-import ApplicationComponent from "src/common/applicationComponent.js";
+import ImageDragAndDrop from "../../common/ImageDragAndDrop";
+import ApplicationComponent from "src/common/ApplicationComponent.js";
 
 const WidgetsDropdown = lazy(() => import("../widgets/WidgetsDropdown.js"));
 const WidgetsBrand = lazy(() => import("../widgets/WidgetsBrand.js"));
