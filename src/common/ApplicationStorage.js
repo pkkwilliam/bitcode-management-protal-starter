@@ -6,6 +6,10 @@ export default class ApplicationStorage {
   }
 
   setUserToken(userToken) {
-    localStorage.setItem(USER_TOKEN_KEY, userToken);
+    if (!userToken) {
+      localStorage.removeItem(USER_TOKEN_KEY);
+    } else {
+      localStorage.setItem(USER_TOKEN_KEY, userToken);
+    }
   }
 }

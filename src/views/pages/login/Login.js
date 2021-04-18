@@ -8,6 +8,10 @@ export default class Login extends ApplicationComponent {
     ...this.state,
   };
 
+  componentDidMount() {
+    this.appStorage.setUserToken(null);
+  }
+
   render() {
     return (
       <LoginView

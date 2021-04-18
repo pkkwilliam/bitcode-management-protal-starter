@@ -9,7 +9,8 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 
-export default function TheHeaderDropDown(props) {
+export default function TheHeaderDropDownView(props) {
+  const { onClickLogout } = props;
   return (
     <CDropdown inNav className="c-header-nav-items mx-2" direction="down">
       <CDropdownToggle className="c-header-nav-link" caret={false}>
@@ -79,7 +80,7 @@ export default function TheHeaderDropDown(props) {
           </CBadge>
         </CDropdownItem>
         <CDropdownItem divider />
-        <CDropdownItem onClick={() => props.history.push("/login")}>
+        <CDropdownItem onClick={onClickLogout}>
           <CIcon name="cil-lock-locked" className="mfe-2" />
           登出
         </CDropdownItem>
