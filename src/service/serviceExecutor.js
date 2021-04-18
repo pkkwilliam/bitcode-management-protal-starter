@@ -1,29 +1,51 @@
 export default class ServiceExecutor {
+  appStorage;
   host;
 
-  constructor(host) {
+  constructor(host, appStorage) {
+    this.appStorage = appStorage;
     this.host = host;
   }
 
-  execute(service) {
-    const { method, url } = service;
-    fetch(this.host + url, {
-      method,
-      mode: "cors",
-    })
-      .then((rawResponse) => this.onSuccess(rawResponse))
-      .catch((exception) => {
-        console.log(exception);
-      });
+  async execute(service) {
+    const { body, method, url } = service;
+    return new Promise((resolve, reject) => {
+      fetch(this.host + url, {
+        body,
+        headers: { "Content-Type": "application/json" },
+        method,
+        mode: "cors",
+      })
+        .then((rawResponse) => {
+          // this can only mean that request to the server is success, but not necessary meant that service is sucess, it can be 400, 401...
+          return this.onSuccessServerRequest(rawResponse, resolve, reject);
+        })
+        .catch((exception) => {
+          // show fetch error
+          console.log("???", exception);
+          return reject();
+        });
+    });
   }
 
-  onSuccess(rawResponse) {
-    const { data, statusCode } = rawResponse;
-    switch (statusCode) {
-      case "200":
-        return JSON.parse(data);
+  checkHeaders(headers) {
+    const userToken = headers.get("Authorization");
+    this.appStorage.setUserToken(userToken);
+  }
+
+  onSuccessServerRequest(rawResponse, resolve, reject) {
+    const { data, headers, status } = rawResponse;
+    this.checkHeaders(headers);
+    switch (status) {
+      case 200:
+        return resolve(JSON.parse(data));
+      case 204:
+        return resolve();
+      case 401: {
+        return reject("Bad Credential");
+      }
       default:
-        return;
+        return reject();
     }
   }
 

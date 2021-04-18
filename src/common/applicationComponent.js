@@ -6,7 +6,16 @@ import ApplicationStorage from "./ApplicationStorage";
 
 export default class ApplicationComponent extends Component {
   state = {
-    ...this.state,
+    modal: {
+      body: "",
+      header: "",
+      show: false,
+    },
+    toast: {
+      body: "",
+      header: "",
+      show: false,
+    },
   };
 
   static _appContext;
@@ -18,7 +27,14 @@ export default class ApplicationComponent extends Component {
     super();
     this._appContext = new ApplicationContext();
     this._appStorage = new ApplicationStorage();
-    this._serviceExecutor = new ServiceExecutor(this.appContext.host);
+    this._serviceExecutor = new ServiceExecutor(
+      this.appContext.host,
+      this.appStorage
+    );
+  }
+
+  componentDidMount() {
+    this.validateUserPermission();
   }
 
   get appContext() {
@@ -35,5 +51,18 @@ export default class ApplicationComponent extends Component {
 
   get serviceExecutor() {
     return this._serviceExecutor;
+  }
+
+  onCloseErrorModal = () => {
+    this.setState({
+      modal: {},
+    });
+  };
+
+  validateUserPermission() {
+    const userToken = this.appStorage.getUserToken();
+    if (!userToken) {
+      this.props.history.push("/login");
+    }
   }
 }

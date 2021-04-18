@@ -5,7 +5,7 @@ export default class ApplicationStorage {
     return localStorage.getItem(USER_TOKEN_KEY);
   }
 
-  setUserUserToken(userToken) {
+  setUserToken(userToken) {
     localStorage.setItem(USER_TOKEN_KEY, userToken);
   }
 }
