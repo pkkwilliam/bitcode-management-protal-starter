@@ -1,3 +1,4 @@
+const TOKEN_HEADER = "Authorization";
 export default class ServiceExecutor {
   appStorage;
   host;
@@ -7,12 +8,21 @@ export default class ServiceExecutor {
     this.host = host;
   }
 
+  get requestHeader() {
+    let headers = { "Content-Type": "application/json" };
+    const userToken = this.appStorage.getUserToken();
+    if (userToken) {
+      headers = { ...headers, Authorization: `Bearer ${userToken}` };
+    }
+    return headers;
+  }
+
   async execute(service) {
     const { body, method, url } = service;
     return new Promise((resolve, reject) => {
       fetch(this.host + url, {
         body,
-        headers: { "Content-Type": "application/json" },
+        headers: this.requestHeader,
         method,
         mode: "cors",
       })
@@ -21,16 +31,16 @@ export default class ServiceExecutor {
           return this.onSuccessServerRequest(rawResponse, resolve, reject);
         })
         .catch((exception) => {
-          // show fetch error
-          console.log("???", exception);
           return reject();
         });
     });
   }
 
   checkHeaders(headers) {
-    const userToken = headers.get("Authorization");
-    this.appStorage.setUserToken(userToken);
+    const userToken = headers.get(TOKEN_HEADER);
+    if (userToken) {
+      this.appStorage.setUserToken(userToken);
+    }
   }
 
   onSuccessServerRequest(rawResponse, resolve, reject) {
