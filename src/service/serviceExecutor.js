@@ -44,11 +44,11 @@ export default class ServiceExecutor {
   }
 
   onSuccessServerRequest(rawResponse, resolve, reject) {
-    const { data, headers, status } = rawResponse;
+    const { headers, status } = rawResponse;
     this.checkHeaders(headers);
     switch (status) {
       case 200:
-        return resolve(JSON.parse(data));
+        return rawResponse.json().then((jsonData) => resolve(jsonData));
       case 204:
         return resolve();
       case 401: {
