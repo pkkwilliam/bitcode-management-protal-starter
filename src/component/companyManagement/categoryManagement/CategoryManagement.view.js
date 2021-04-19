@@ -1,50 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 import ApplicationComponentView from "src/common/ApplicationComponentView";
-import {
-  CBadge,
-  CCard,
-  CCardBody,
-  CCardHeader,
-  CCol,
-  CCollapse,
-  CDataTable,
-  CRow,
-} from "@coreui/react";
+import { CCard } from "@coreui/react";
+import { CIcon } from "@coreui/icons-react";
+import ApplicationTable from "src/common/ApplicationTable";
 
 export const ID_COLUMN = { key: "id", label: "ID" };
 export const ITEM_DETAIL_COLUMN = { key: "details", label: "" };
 export const NAME_COLUMN = { key: "name", label: "類別" };
 
+const COLUMNS = [
+  { title: "ID", dataIndex: "id", key: "id" },
+  { title: "類別", dataIndex: "name", key: "name" },
+];
+
 export default function CategoryManagementView(props) {
+  const { getCategoriesService } = props;
   return (
     <ApplicationComponentView {...props}>
       <CCard>
-        <CategoryTable {...props} />
+        <ApplicationTable
+          columns={COLUMNS}
+          dataServiceRequest={getCategoriesService}
+          sortable
+        />
       </CCard>
     </ApplicationComponentView>
   );
-}
-
-export function CategoryTable(props) {
-  const [showDetailId, setShowDetailId] = useState(0);
-  const { categories } = props;
-  return (
-    <CDataTable
-      items={categories}
-      fields={[ID_COLUMN, NAME_COLUMN, ITEM_DETAIL_COLUMN]}
-      scopedSlots={{
-        details: (category, index) => {
-          return (
-            <CCollapse show={showDetailId === category.id}>
-              <CCardBody></CCardBody>
-            </CCollapse>
-          );
-        },
-      }}
-    />
-  );
-}
-
-export function ModifyButtonRow(props) {
-  const { onClickAdd, onClickDelete, onClickEdit, onClickUpdate } = props;
 }
