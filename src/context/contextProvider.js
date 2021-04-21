@@ -4,7 +4,7 @@ export const RmmsPortalContext = React.createContext();
 
 export default class RmmsPortalAppState extends Component {
   state = {
-    category: { dirty: true },
+    category: { categories: [], dirty: true },
     company: { dirty: true },
     item: { dirty: true },
     store: { dirty: true },
@@ -16,7 +16,11 @@ export default class RmmsPortalAppState extends Component {
     return (
       <RmmsPortalContext.Provider
         value={{
-          category: { ...category },
+          category: {
+            ...category,
+            setCategories: this.setCategories,
+            setCategoryDirty: this.setCategoryDirty,
+          },
           company: { ...company },
           item: { ...item },
           store: { ...store },
@@ -26,5 +30,23 @@ export default class RmmsPortalAppState extends Component {
         {children}
       </RmmsPortalContext.Provider>
     );
+  };
+
+  setCategories = (categories) => {
+    this.setState((state) => ({
+      category: {
+        categories,
+        dirty: false,
+      },
+    }));
+  };
+
+  setCategoryDirty = () => {
+    this.setState((state) => ({
+      category: {
+        ...state.category,
+        dirty: true,
+      },
+    }));
   };
 }

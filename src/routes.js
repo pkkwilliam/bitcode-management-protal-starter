@@ -69,6 +69,9 @@ const CategoryManagement = React.lazy(() =>
 const ItemManagement = React.lazy(() =>
   import("./component/companyManagement/itemManagement/ItemManagement")
 );
+const CategoryDetail = React.lazy(() =>
+  import("./component/companyManagement/categoryDetail/CategoryDetail")
+);
 
 const routes = [
   { path: "/", exact: true, name: "Home" },
@@ -135,13 +138,18 @@ const routes = [
   },
   {
     path: "/company_manager/category_management",
-    name: "CategoryManagement",
+    name: "分類管理",
     component: CategoryManagement,
   },
   {
     path: "/company_manager/item_management",
     name: "ItemManagement",
     component: ItemManagement,
+  },
+  {
+    path: "/company_manager/category_detail",
+    name: "分類詳細",
+    component: CategoryDetail,
   },
 ];
 

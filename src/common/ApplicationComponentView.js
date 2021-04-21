@@ -1,11 +1,13 @@
 import React from "react";
 import { CModal, CModalBody, CModalHeader } from "@coreui/react";
+import ApplicationToast from "./ApplicationToast";
 
 export default function ApplicationComponentView(props) {
-  const { children } = props;
+  const { children, modal, toasts } = props;
   return (
     <>
-      <ApplicationErrorModal {...props} />
+      <ApplicationErrorModal modal={modal} />
+      <ApplicationToast toasts={toasts} />
       {children}
     </>
   );

@@ -16,11 +16,9 @@ export default class ApplicationTable extends ApplicationComponent {
 
   componentDidMount() {
     const { dataServiceRequest } = this.props;
-    this.serviceExecutor.execute(dataServiceRequest()).then((dataSource) =>
-      this.setState({
-        dataSource: generateDataSource(dataSource),
-      })
-    );
+    dataServiceRequest().then((dataSource) => {
+      this.setState({ dataSource: generateDataSource(dataSource) });
+    });
   }
 
   render() {
@@ -78,9 +76,9 @@ function generateTableColumns(columns, sortable, editable) {
   if (sortable) {
     columns = [
       {
-        title: "Sort",
+        title: "順序",
         dataIndex: "sort",
-        width: 30,
+        width: 90,
         className: "drag-visible",
         render: () => <DragHandle />,
       },

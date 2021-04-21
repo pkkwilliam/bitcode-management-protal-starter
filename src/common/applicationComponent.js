@@ -6,16 +6,13 @@ import ApplicationStorage from "./ApplicationStorage";
 
 export default class ApplicationComponent extends Component {
   state = {
+    loading: false,
     modal: {
       body: "",
       header: "",
       show: false,
     },
-    toast: {
-      body: "",
-      header: "",
-      show: false,
-    },
+    toasts: [],
   };
 
   static _appContext;
@@ -51,6 +48,25 @@ export default class ApplicationComponent extends Component {
 
   get serviceExecutor() {
     return this._serviceExecutor;
+  }
+
+  addToastMessage(toast) {
+    this.setState((state) => ({
+      toasts: state.toasts.concat(toast),
+    }));
+  }
+
+  getRouterProps() {
+    return this?.props?.history?.location?.state ?? {};
+  }
+
+  goTo(page, params = {}, delay = 0) {
+    setTimeout(() => {
+      this.props.history.push({
+        pathname: page,
+        state: params,
+      });
+    }, delay);
   }
 
   onCloseErrorModal = () => {
