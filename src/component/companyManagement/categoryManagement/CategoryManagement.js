@@ -7,21 +7,33 @@ import CategoryManagementView from "./CategoryManagement.view";
 export default class CategoryManagement extends ApplicationComponent {
   state = {
     ...this.state,
+    categories: [],
   };
 
   componentDidMount() {
     super.componentDidMount();
+    this.getCategories();
   }
 
   render() {
     return (
       <CategoryManagementView
-        getCategoriesServiceRequest={this.getCategoriesServiceRequest}
         onClickAddRow={this.onClickAddRow}
         onClickRow={this.onClickRow}
+        setCategoriesState={this.setCategoriesState}
         {...this.state}
       />
     );
+  }
+
+  getCategories() {
+    const { dirty } = this.appState.category;
+    if (dirty) {
+      this.serviceExecutor.execute(GET_CATEGORIES()).then((categories) => {
+        this.appState.category.setCategories(categories);
+        this.setCategoriesState(categories);
+      });
+    }
   }
 
   getCategoriesServiceRequest = async () => {
@@ -48,6 +60,12 @@ export default class CategoryManagement extends ApplicationComponent {
     this.goTo(CATEGORY_DETAIL, {
       categoryId: category.id,
       isCreateView: false,
+    });
+  };
+
+  setCategoriesState = (categories) => {
+    this.setState({
+      categories,
     });
   };
 }

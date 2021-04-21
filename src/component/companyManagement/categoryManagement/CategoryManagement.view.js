@@ -11,13 +11,14 @@ const COLUMNS = [
 ];
 
 export default function CategoryManagementView(props) {
-  const { getCategoriesServiceRequest, onClickAddRow, onClickRow } = props;
+  const { categories, onClickAddRow, onClickRow, setCategoriesState } = props;
   return (
     <ApplicationEditableTableContainer header={"分類管理"} {...props}>
       <EditButtonRow onClickAdd={onClickAddRow} />
       <ApplicationTable
         columns={generateEditableColumns(COLUMNS, onClickRow)}
-        dataServiceRequest={getCategoriesServiceRequest}
+        dataSource={categories}
+        setDataSource={setCategoriesState}
         sortable
       />
     </ApplicationEditableTableContainer>

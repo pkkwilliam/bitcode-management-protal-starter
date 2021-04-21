@@ -10,26 +10,14 @@ import { CIcon } from "@coreui/icons-react";
 import ApplicationComponent from "./ApplicationComponent";
 
 export default class ApplicationTable extends ApplicationComponent {
-  state = {
-    dataSource: [],
-  };
-
-  componentDidMount() {
-    const { dataServiceRequest } = this.props;
-    dataServiceRequest().then((dataSource) => {
-      this.setState({ dataSource: generateDataSource(dataSource) });
-    });
-  }
-
   render() {
-    const { columns, editable, sortable } = this.props;
-    const { dataSource } = this.state;
+    const { columns, dataSource, editable, sortable } = this.props;
     return (
       <Table
         pagination={false}
         dataSource={dataSource}
         columns={generateTableColumns(columns, sortable, editable)}
-        rowKey="index"
+        rowKey="sequence"
         components={{
           body: {
             wrapper: this.DraggableContainer,
@@ -41,14 +29,14 @@ export default class ApplicationTable extends ApplicationComponent {
   }
 
   onSortEnd = ({ oldIndex, newIndex }) => {
-    const { dataSource } = this.state;
+    const { dataSource, setDataSource } = this.props;
     if (oldIndex !== newIndex) {
       const newData = arrayMove(
         [].concat(dataSource),
         oldIndex,
         newIndex
       ).filter((el) => !!el);
-      this.setState({ dataSource: newData });
+      setDataSource(newData);
     }
   };
 
@@ -63,10 +51,10 @@ export default class ApplicationTable extends ApplicationComponent {
   );
 
   DraggableBodyRow = ({ className, style, ...restProps }) => {
-    const { dataSource } = this.state;
+    const { dataSource } = this.props;
     // function findIndex base on Table rowKey props and should always be a right array index
     const index = dataSource.findIndex(
-      (x) => x.index === restProps["data-row-key"]
+      (x) => x.sequence === restProps["data-row-key"]
     );
     return <SortableItem index={index} {...restProps} />;
   };
@@ -86,11 +74,6 @@ function generateTableColumns(columns, sortable, editable) {
     ];
   }
   return columns;
-}
-
-// TODO need index from server in sortable data
-function generateDataSource(rows) {
-  return rows.map((row, index) => ({ ...row, key: index + 1, index: index }));
 }
 
 const DragHandle = sortableHandle(() => (
