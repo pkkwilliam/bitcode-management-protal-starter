@@ -1,7 +1,7 @@
 import React from "react";
-import ApplicationComponentView from "src/common/ApplicationComponentView";
+import ApplicationComponentView from "./ApplicationComponentView";
 import { CCard, CCardBody, CCardHeader } from "@coreui/react";
-import ApplicationTextButton from "src/common/ApplicationTextButton";
+import ApplicationTextButton from "./ApplicationTextButton";
 import { Button } from "antd";
 
 export default function ApplicationEditableTableContainer(props) {
@@ -20,7 +20,7 @@ export function EditButtonRow({ onClickAdd }) {
   return (
     <div style={{ marginBottom: 20 }}>
       <Button onClick={onClickAdd} type="primary">
-        增加
+        新增
       </Button>
     </div>
   );

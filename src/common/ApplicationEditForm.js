@@ -38,6 +38,7 @@ export default function ApplicationEditForm(props) {
             <Form.Item>
               <ApplicationLoadableButton
                 block
+                disabled={isCreateView}
                 loading={loading}
                 onClick={onClickDelete}
                 type="danger"

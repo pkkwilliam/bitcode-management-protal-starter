@@ -15,7 +15,6 @@ import {
 import CIcon from "@coreui/icons-react";
 
 import MainChartExample from "../charts/MainChartExample.js";
-import ImageDragAndDrop from "../../common/ImageDragAndDrop";
 import ApplicationComponent from "src/common/ApplicationComponent.js";
 
 const WidgetsDropdown = lazy(() => import("../widgets/WidgetsDropdown.js"));
@@ -34,7 +33,6 @@ export default class Dashboard extends ApplicationComponent {
                   Traffic
                 </h4>
                 <div className="small text-muted">November 2017</div>
-                <ImageDragAndDrop />
               </CCol>
               <CCol sm="7" className="d-none d-md-block">
                 <CButton color="primary" className="float-right">

@@ -1,8 +1,9 @@
 import React from "react";
 import ApplicationComponent from "src/common/ApplicationComponent";
 import { CATEGORY_DETAIL } from "src/routes/ApplicationRoutes";
-import { GET_CATEGORIES } from "src/service/service";
+import { UPDATE_CATEGORIES_SEQUENCES } from "src/service/service";
 import CategoryManagementView from "./CategoryManagement.view";
+import { generateFirstTimeSortableDataSource } from "../../../common/ApplicationTable";
 
 export default class CategoryManagement extends ApplicationComponent {
   state = {
@@ -19,7 +20,7 @@ export default class CategoryManagement extends ApplicationComponent {
     return (
       <CategoryManagementView
         onClickAddRow={this.onClickAddRow}
-        onClickRow={this.onClickRow}
+        onClickRowEdit={this.onClickRowEdit}
         setCategoriesState={this.setCategoriesState}
         {...this.state}
       />
@@ -27,28 +28,13 @@ export default class CategoryManagement extends ApplicationComponent {
   }
 
   getCategories() {
-    const { dirty } = this.appState.category;
-    if (dirty) {
-      this.serviceExecutor.execute(GET_CATEGORIES()).then((categories) => {
-        this.appState.category.setCategories(categories);
-        this.setCategoriesState(categories);
-      });
-    }
-  }
-
-  getCategoriesServiceRequest = async () => {
-    const { dirty } = this.appState.category;
-    return new Promise((resolve, reject) => {
-      if (dirty) {
-        this.serviceExecutor.execute(GET_CATEGORIES()).then((categories) => {
-          this.appState.category.setCategories(categories);
-          return resolve(categories);
-        });
-      } else {
-        return resolve(this.appState.category.categories);
-      }
+    this.appStateService.getCategories().then((categories) => {
+      this.setCategoriesState(
+        generateFirstTimeSortableDataSource(categories),
+        false
+      );
     });
-  };
+  }
 
   onClickAddRow = () => {
     this.goTo(CATEGORY_DETAIL, {
@@ -56,16 +42,19 @@ export default class CategoryManagement extends ApplicationComponent {
     });
   };
 
-  onClickRow = (category) => {
+  onClickRowEdit = (category) => {
     this.goTo(CATEGORY_DETAIL, {
       categoryId: category.id,
       isCreateView: false,
     });
   };
 
-  setCategoriesState = (categories) => {
+  setCategoriesState = (categories, isSequenceUpdate = false) => {
     this.setState({
       categories,
     });
+    if (isSequenceUpdate) {
+      this.serviceExecutor.execute(UPDATE_CATEGORIES_SEQUENCES(categories));
+    }
   };
 }

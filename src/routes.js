@@ -60,22 +60,33 @@ const Widgets = React.lazy(() => import("./views/widgets/Widgets"));
 const Users = React.lazy(() => import("./views/users/Users"));
 const User = React.lazy(() => import("./views/users/User"));
 
-const StoreManagement = React.lazy(() =>
-  import("./component/companyAdmin/storeManagement/StoreManagement")
+const CategoryDetail = React.lazy(() =>
+  import("./component/companyManagement/categoryDetail/CategoryDetail")
 );
 const CategoryManagement = React.lazy(() =>
   import("./component/companyManagement/categoryManagement/CategoryManagement")
 );
+const CompanyCustomise = React.lazy(() =>
+  import("./component/companyManagement/companyCustomise/CompanyCustomise")
+);
+const CompanyCustomiseImageUploader = React.lazy(() =>
+  import(
+    "./component/companyCustomiseImageUploader/CompanyCustomiseImageUploader"
+  )
+);
+const ItemDetail = React.lazy(() =>
+  import("./component/companyManagement/itemDetail/ItemDetail")
+);
 const ItemManagement = React.lazy(() =>
   import("./component/companyManagement/itemManagement/ItemManagement")
 );
-const CategoryDetail = React.lazy(() =>
-  import("./component/companyManagement/categoryDetail/CategoryDetail")
+const StoreManagement = React.lazy(() =>
+  import("./component/companyAdmin/storeManagement/StoreManagement")
 );
 
 const routes = [
-  { path: "/", exact: true, name: "Home" },
-  { path: "/dashboard", name: "Dashboard", component: Dashboard },
+  { path: "/", exact: true, name: "主頁" },
+  { path: "/dashboard", name: "儀表板", component: Dashboard },
   { path: "/theme", name: "Theme", component: Colors, exact: true },
   { path: "/theme/colors", name: "Colors", component: Colors },
   { path: "/theme/typography", name: "Typography", component: Typography },
@@ -137,19 +148,34 @@ const routes = [
     component: StoreManagement,
   },
   {
+    path: "/company_manager/company_customise/image_uploader",
+    name: "頁面定制圖片上傳",
+    component: CompanyCustomiseImageUploader,
+  },
+  {
+    path: "/company_manager/company_customise",
+    name: "頁面定制",
+    component: CompanyCustomise,
+  },
+  {
+    path: "/company_manager/category_management/category_detail",
+    name: "分類詳細",
+    component: CategoryDetail,
+  },
+  {
     path: "/company_manager/category_management",
     name: "分類管理",
     component: CategoryManagement,
   },
   {
-    path: "/company_manager/item_management",
-    name: "ItemManagement",
-    component: ItemManagement,
+    path: "/company_manager/item_management/item_detail",
+    name: "產品詳細",
+    component: ItemDetail,
   },
   {
-    path: "/company_manager/category_detail",
-    name: "分類詳細",
-    component: CategoryDetail,
+    path: "/company_manager/item_management",
+    name: "產品管理",
+    component: ItemManagement,
   },
 ];
 

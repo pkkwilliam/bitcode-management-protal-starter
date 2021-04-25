@@ -1,5 +1,7 @@
 import { Component } from "react";
 import { RmmsPortalContext } from "src/context/contextProvider";
+import AppStateService from "src/service/AppStateService";
+import { GET_COMPANY } from "src/service/service";
 import ServiceExecutor from "src/service/serviceExecutor";
 import ApplicationContext from "./ApplicationContext";
 import ApplicationStorage from "./ApplicationStorage";
@@ -16,6 +18,7 @@ export default class ApplicationComponent extends Component {
   };
 
   static _appContext;
+  static _appStateService;
   static _appStorage;
   static contextType = RmmsPortalContext;
   static _serviceExecutor;
@@ -32,6 +35,7 @@ export default class ApplicationComponent extends Component {
 
   componentDidMount() {
     this.validateUserPermission();
+    this.initService();
   }
 
   get appContext() {
@@ -40,6 +44,16 @@ export default class ApplicationComponent extends Component {
 
   get appState() {
     return this.context;
+  }
+
+  get appStateService() {
+    if (!this._appStateService) {
+      this._appStateService = new AppStateService(
+        this.appState,
+        this.serviceExecutor
+      );
+    }
+    return this._appStateService;
   }
 
   get appStorage() {
@@ -54,6 +68,15 @@ export default class ApplicationComponent extends Component {
     this.setState((state) => ({
       toasts: state.toasts.concat(toast),
     }));
+  }
+
+  initService() {
+    const { dirty } = this.appState.company;
+    if (dirty) {
+      this.serviceExecutor
+        .execute(GET_COMPANY())
+        .then((company) => this.appState.company.setCompany(company));
+    }
   }
 
   getRouterProps() {
@@ -74,6 +97,10 @@ export default class ApplicationComponent extends Component {
       modal: {},
     });
   };
+
+  toggleLoading() {
+    this.setState((state) => ({ loading: !state.loading }));
+  }
 
   validateUserPermission() {
     const userToken = this.appStorage.getUserToken();

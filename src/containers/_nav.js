@@ -21,13 +21,19 @@ export const companyManagementNav = [
   },
   {
     _tag: "CSidebarNavItem",
+    name: "頁面定制",
+    to: "/company_manager/company_customise",
+    icon: "cil-puzzle",
+  },
+  {
+    _tag: "CSidebarNavItem",
     name: "分類管理",
     to: "/company_manager/category_management",
     icon: "cil-puzzle",
   },
   {
     _tag: "CSidebarNavItem",
-    name: "商品管理",
+    name: "產品管理",
     to: "/company_manager/item_management",
     icon: "cil-puzzle",
   },
