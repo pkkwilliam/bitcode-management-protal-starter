@@ -12,17 +12,31 @@ import ItemDetailView, {
   COST_TEXTFIELD,
   DESCRIPTION_TEXTFIELD,
   ITEM_NAME_TEXTFIELD,
+  RS_ADDRESS_TEXTFIELD,
+  RS_LIVING_ROOM_TEXTFIELD,
+  RS_RESTROOM_TEXTFIELD,
+  RS_ROOM_TEXTFIELD,
 } from "./ItemDetail.view";
 
 export default class ItemDetail extends ApplicationComponent {
   state = {
     ...this.state,
     item: {
+      address: "",
       area: "",
+      categories: [],
       cost: 0,
       description: "",
+      features: [],
+      imageUrls: [
+        "https://image.freepik.com/free-vector/investing-money-house_1133-87.jpg",
+        "https://image.freepik.com/free-vector/investing-money-house_1133-87.jpg",
+      ],
+      listingType: undefined,
+      livingRoom: 0,
       name: "",
-      categories: [],
+      restroom: 0,
+      room: 0,
     },
     isCreateView: false,
   };
@@ -54,19 +68,44 @@ export default class ItemDetail extends ApplicationComponent {
     return (
       <ItemDetailView
         categories={this.appState.category.categories}
+        onChangeFeature={this.onChangeFeature}
         onChangeTextfieldInput={this.onChangeTextfieldInput}
         onClickCancel={this.onClickCancel}
         onClickDelete={this.onClickDelete}
         onClickSubmit={this.onClickSubmit}
         onSelectedCategory={this.onSelectedCategory}
+        onSelectedListingType={this.onSelectedListingType}
         {...this.state}
       />
     );
   }
 
+  onChangeFeature = (index, value) => {
+    let { features } = this.state.item;
+    if (!features[index]) {
+      features[index] = "";
+    }
+    features[index] = value;
+    this.setState((state) => ({
+      item: {
+        ...state.item,
+        features,
+      },
+    }));
+  };
+
   onChangeTextfieldInput = (type, event) => {
     let { value } = event.target;
-    let { area, cost, description, name } = this.state.item;
+    let {
+      address,
+      area,
+      cost,
+      description,
+      livingRoom,
+      name,
+      restroom,
+      room,
+    } = this.state.item;
     switch (type) {
       case AREA_TEXTFIELD:
         area = value;
@@ -80,16 +119,32 @@ export default class ItemDetail extends ApplicationComponent {
       case ITEM_NAME_TEXTFIELD:
         name = value;
         break;
+      case RS_ADDRESS_TEXTFIELD:
+        address = value;
+        break;
+      case RS_LIVING_ROOM_TEXTFIELD:
+        livingRoom = value;
+        break;
+      case RS_RESTROOM_TEXTFIELD:
+        restroom = value;
+        break;
+      case RS_ROOM_TEXTFIELD:
+        room = value;
+        break;
       default:
         break;
     }
     this.setState((state) => ({
       item: {
         ...state.item,
+        address,
         area,
         cost,
         description,
+        livingRoom,
         name,
+        restroom,
+        room,
       },
     }));
   };
@@ -146,6 +201,15 @@ export default class ItemDetail extends ApplicationComponent {
       item: {
         ...state.item,
         categories: categoryObjects,
+      },
+    }));
+  };
+
+  onSelectedListingType = (listingType) => {
+    this.setState((state) => ({
+      item: {
+        ...state.item,
+        listingType,
       },
     }));
   };

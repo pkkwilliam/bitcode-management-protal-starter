@@ -13,6 +13,7 @@ export default class RmmsPortalAppState extends Component {
           primary: "",
           secondary: "",
         },
+        mainMenuButtons: [],
       },
       dirty: true,
     },

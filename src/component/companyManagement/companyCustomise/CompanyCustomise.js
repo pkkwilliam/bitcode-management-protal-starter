@@ -1,6 +1,10 @@
 import React from "react";
 import ApplicationComponent from "src/common/ApplicationComponent";
-import { COMPANY_CUSTOMISE_IMAGE_UPLOADER } from "src/routes/ApplicationRoutes";
+import {
+  COMPANY_CUSTOMISE_BOTTOM_LIST,
+  COMPANY_CUSTOMISE_IMAGE_UPLOADER,
+  COMPANY_CUSTOMISE_MAIN_MENU_BUTTON,
+} from "src/routes/ApplicationRoutes";
 import { UPDATE_COMPANY_CUSTOMISE } from "src/service/service";
 import CompanyCustomiseView from "./CompanyCustomise.view";
 
@@ -8,7 +12,7 @@ export default class CompanyCustomise extends ApplicationComponent {
   state = {
     ...this.state,
     companyCustomise: {
-      landingPage: { carousel: [] },
+      landingPage: { bottomList: [], carousel: [], mainMenuButtons: [] },
       style: {
         primary: "",
         secondary: "",
@@ -26,8 +30,11 @@ export default class CompanyCustomise extends ApplicationComponent {
   render() {
     return (
       <CompanyCustomiseView
+        onClickAddBottomList={this.onClickAddBottomList}
         onClickAddCarouselImage={this.onClickAddCarouselImage}
+        onClickEditBottomList={this.onClickEditBottomList}
         onClickEditCarouselImage={this.onClickEditCarouselImage}
+        onClickEditMainMenuButton={this.onClickEditMainMenuButton}
         onClickUpdateCompanyCustomise={this.onClickUpdateCompanyCustomise}
         onChangeCompanyCustomise={this.onChangeCompanyCustomise}
         {...this.state}
@@ -41,15 +48,37 @@ export default class CompanyCustomise extends ApplicationComponent {
     });
   };
 
+  onClickAddBottomList = () => {
+    this.goTo(COMPANY_CUSTOMISE_BOTTOM_LIST, { isCreateView: true });
+  };
+
   onClickAddCarouselImage = () => {
     this.goTo(COMPANY_CUSTOMISE_IMAGE_UPLOADER, { isCreateView: true });
   };
 
-  onClickEditCarouselImage = (row) => {
-    console.log(row);
+  onClickEditBottomList = (row, index) => {
+    this.goTo(COMPANY_CUSTOMISE_BOTTOM_LIST, {
+      id: row.id,
+      index,
+      isCreateView: false,
+      type: row.type,
+    });
+  };
+
+  onClickEditCarouselImage = (row, index) => {
     this.goTo(COMPANY_CUSTOMISE_IMAGE_UPLOADER, {
       id: row.id,
+      index,
       isCreateView: false,
+      type: row.type,
+    });
+  };
+
+  onClickEditMainMenuButton = (row, index) => {
+    this.goTo(COMPANY_CUSTOMISE_MAIN_MENU_BUTTON, {
+      id: row.id,
+      index,
+      name: row.name,
       type: row.type,
     });
   };

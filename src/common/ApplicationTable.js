@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Table } from "antd";
+import { Image, Table, Tag } from "antd";
 import {
   sortableContainer,
   sortableElement,
@@ -21,8 +21,10 @@ export const CATEGORY_COLUMN = {
 };
 export const CATEGORIES_TAGS_COLUMN = {
   title: "分類",
-  dataIndex: "categoriesTags",
-  key: "categoriesTags",
+  dataIndex: "categories",
+  key: "categories",
+  render: (categories) =>
+    categories.map((category) => <Tag color="success">{category.name}</Tag>),
 };
 export const COST_COLUMN = {
   title: "價格",
@@ -44,6 +46,12 @@ export const ITEM_NAME_COLUMN = {
   title: "名字",
   dataIndex: "name",
   key: "name",
+};
+export const RE_LISTING_TYPE = {
+  title: "類型",
+  dataIndex: "listingType",
+  key: "name",
+  render: (listingType) => <Tag color="processing">{listingType}</Tag>,
 };
 export const TYPE_COLUMN = {
   title: "類別",

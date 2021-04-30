@@ -7,6 +7,7 @@ import ApplicationLoadableButton from "./ApplicationLoadableButton";
 export default function ApplicationEditForm(props) {
   const {
     children,
+    deleteable,
     loading,
     header,
     isCreateView,
@@ -38,7 +39,7 @@ export default function ApplicationEditForm(props) {
             <Form.Item>
               <ApplicationLoadableButton
                 block
-                disabled={isCreateView}
+                disabled={isCreateView || deleteable}
                 loading={loading}
                 onClick={onClickDelete}
                 type="danger"

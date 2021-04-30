@@ -13,14 +13,37 @@ import ApplicationEditableTableContainer, {
   generateEditableColumns,
 } from "src/common/ApplicationEditableTableContainer";
 
-const COLUMNS = [IMAGE_COLUMN, ITEM_NAME_COLUMN, TYPE_COLUMN];
+const BOTTOM_LIST_COLUMN = [TYPE_COLUMN];
+const CAROUSEL_COLUMNS = [IMAGE_COLUMN, ITEM_NAME_COLUMN, TYPE_COLUMN];
+const MAIN_BUTTONS_COLUMNS = [IMAGE_COLUMN, ITEM_NAME_COLUMN, TYPE_COLUMN];
 
 export default function CompanyCustomiseView(props) {
   return (
     <ApplicationComponentView {...props}>
       <Theme {...props} />
       <LandingPageCarousel {...props} />
+      <LandingPageMainMenuButtons {...props} />
+      <LandingPageBottomList {...props} />
     </ApplicationComponentView>
+  );
+}
+
+function LandingPageBottomList(props) {
+  let { companyCustomise, onClickAddBottomList, onClickEditBottomList } = props;
+  let { bottomList } = companyCustomise.landingPage;
+
+  return (
+    <ApplicationEditableTableContainer header="首頁-主頁底表" {...props}>
+      <EditButtonRow onClickAdd={onClickAddBottomList} />
+      <ApplicationTable
+        columns={generateEditableColumns(
+          BOTTOM_LIST_COLUMN,
+          onClickEditBottomList
+        )}
+        dataSource={bottomList}
+        setDataSource={() => console.log("please create this function")}
+      />
+    </ApplicationEditableTableContainer>
   );
 }
 
@@ -36,8 +59,28 @@ function LandingPageCarousel(props) {
     <ApplicationEditableTableContainer header="首頁-旋轉圖片" {...props}>
       <EditButtonRow onClickAdd={onClickAddCarouselImage} />
       <ApplicationTable
-        columns={generateEditableColumns(COLUMNS, onClickEditCarouselImage)}
+        columns={generateEditableColumns(
+          CAROUSEL_COLUMNS,
+          onClickEditCarouselImage
+        )}
         dataSource={carousel}
+        setDataSource={() => console.log("please create this function")}
+      />
+    </ApplicationEditableTableContainer>
+  );
+}
+
+function LandingPageMainMenuButtons(props) {
+  const { companyCustomise, onClickEditMainMenuButton } = props;
+  const { mainMenuButtons } = companyCustomise.landingPage;
+  return (
+    <ApplicationEditableTableContainer header="首頁-主頁按鈕" {...props}>
+      <ApplicationTable
+        columns={generateEditableColumns(
+          MAIN_BUTTONS_COLUMNS,
+          onClickEditMainMenuButton
+        )}
+        dataSource={mainMenuButtons}
         setDataSource={() => console.log("please create this function")}
       />
     </ApplicationEditableTableContainer>

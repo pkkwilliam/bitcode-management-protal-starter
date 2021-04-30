@@ -69,9 +69,19 @@ const CategoryManagement = React.lazy(() =>
 const CompanyCustomise = React.lazy(() =>
   import("./component/companyManagement/companyCustomise/CompanyCustomise")
 );
+const CompanyCustomiseBottomList = React.lazy(() =>
+  import(
+    "./component/companyManagement/companyCustomiseBottomList/companyCustomiseBottomList"
+  )
+);
 const CompanyCustomiseImageUploader = React.lazy(() =>
   import(
-    "./component/companyCustomiseImageUploader/CompanyCustomiseImageUploader"
+    "./component/companyManagement/companyCustomiseImageUploader/CompanyCustomiseImageUploader"
+  )
+);
+const CompanyCustomiseMainMenuButton = React.lazy(() =>
+  import(
+    "./component/companyManagement/companyCustomiseMainMenuButton/companyCustomiseMainMenuButton"
   )
 );
 const ItemDetail = React.lazy(() =>
@@ -149,8 +159,18 @@ const routes = [
   },
   {
     path: "/company_manager/company_customise/image_uploader",
-    name: "頁面定制圖片上傳",
+    name: "旋轉圖片",
     component: CompanyCustomiseImageUploader,
+  },
+  {
+    path: "/company_manager/company_customise/main_menu_button",
+    name: "主頁按鈕",
+    component: CompanyCustomiseMainMenuButton,
+  },
+  {
+    path: "/company_manager/company_customise/bottom_list",
+    name: "主頁㡳表",
+    component: CompanyCustomiseBottomList,
   },
   {
     path: "/company_manager/company_customise",

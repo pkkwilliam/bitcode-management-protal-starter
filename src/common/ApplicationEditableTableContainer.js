@@ -32,10 +32,10 @@ export function generateEditableColumns(columns, onClick) {
     {
       title: "操作",
       key: "action",
-      render: (row) => {
+      render: (text, row, index) => {
         return (
           <ApplicationTextButton
-            onClick={() => onClick(row)}
+            onClick={() => onClick(row, index)}
             style={{ border: 0, padding: 0 }}
           >
             修改

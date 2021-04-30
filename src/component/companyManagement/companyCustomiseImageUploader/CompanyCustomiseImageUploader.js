@@ -1,6 +1,6 @@
 import React from "react";
 import { COMPANY_CUSTOMISE } from "src/routes/ApplicationRoutes";
-import CompanyCustomise from "../companyManagement/companyCustomise/CompanyCustomise";
+import CompanyCustomise from "../companyCustomise/CompanyCustomise";
 import CompanyCustomiseImageUploaderView, {
   CATEGORY_SELECT,
   ITEM_SELECT,
@@ -20,7 +20,7 @@ export default class CompanyCustomiseImageUploader extends CompanyCustomise {
 
   componentDidMount() {
     super.componentDidMount();
-    const { id, index, isCreateView, type } = this.getRouterProps();
+    const { id, index, isCreateView, name, type } = this.getRouterProps();
     if (isCreateView) {
       this.setState({
         isCreateView,
@@ -28,7 +28,9 @@ export default class CompanyCustomiseImageUploader extends CompanyCustomise {
     } else {
       this.setState({
         editObjectId: id,
+        index,
         objectSelected: id,
+        name,
         selectedType: type,
       });
       this.onChangeOptionType(type);
@@ -90,15 +92,23 @@ export default class CompanyCustomiseImageUploader extends CompanyCustomise {
   onClickSubmit = () => {
     const { isCreateView } = this.state;
     if (isCreateView) {
-      this.pushNewImageToCarousel();
+      this.addObjectIntoCurrentCompanyCustomise();
     } else {
-      this.updateCarouselImage();
+      this.updateObjectInCurrentCompanyCustomise();
     }
 
     this.updateCompanyCustomise(() =>
       setTimeout(() => this.goTo(COMPANY_CUSTOMISE), 2000)
     );
   };
+
+  addObjectIntoCurrentCompanyCustomise() {
+    this.pushNewImageToCarousel();
+  }
+
+  updateObjectInCurrentCompanyCustomise() {
+    this.updateCarouselImage();
+  }
 
   onObjectOptionLoaded(type, options) {
     this.setState({
@@ -110,6 +120,7 @@ export default class CompanyCustomiseImageUploader extends CompanyCustomise {
   removeImage(imagesObject, image) {
     return imagesObject.filter((imageObject) => imageObject.id !== image);
   }
+
   // TODO clean this shit
   updateCarouselImage() {
     const {

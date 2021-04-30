@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Select } from "antd";
 import ApplicationEditForm from "src/common/ApplicationEditForm";
-import ApplicationImageUploader from "../../common/ApplicationImageUploader";
+import ApplicationImageUploader from "../../../common/ApplicationImageUploader";
 
 export const CATEGORY_SELECT = { label: "分類", value: "category" };
 export const ITEM_SELECT = { label: "產品", value: "item" };
@@ -37,9 +37,10 @@ export default function CompanyCustomiseImageUploaderView(props) {
 }
 
 export function TypeSelection(props) {
-  const { selectedType, onChangeOptionType } = props;
+  const { disabled = false, selectedType, onChangeOptionType } = props;
   return (
     <Select
+      disabled={disabled}
       onChange={(value) => onChangeOptionType(value)}
       options={[CATEGORY_SELECT, ITEM_SELECT]}
       value={selectedType}
@@ -51,7 +52,6 @@ export function ObjectGenerate(props) {
   const { objectSelected, onChangeObject, options } = props;
   const generateOptions = (options) =>
     options.map((option) => ({ value: option.id, label: option.name }));
-  console.log(objectSelected);
   return (
     <Select
       disabled={options.length < 1}

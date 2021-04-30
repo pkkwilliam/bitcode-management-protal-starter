@@ -1,12 +1,17 @@
 import React from "react";
-import { Col, Form, Input, Row, Select } from "antd";
+import { Button, Col, Form, Input, Row, Select } from "antd";
 import ApplicationEditForm from "src/common/ApplicationEditForm";
 import ApplicationImageUploader from "src/common/ApplicationImageUploader";
+import { CloseCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
 export const AREA_TEXTFIELD = "AREA_TEXTFIELD";
 export const COST_TEXTFIELD = "COST_TEXTFIELD";
 export const DESCRIPTION_TEXTFIELD = "DESCRIPTION_TEXTFIELD";
 export const ITEM_NAME_TEXTFIELD = "ITEM_NAME_TEXTFIELD";
+export const RS_ADDRESS_TEXTFIELD = "RS_ADDRESS_TEXTFIELD";
+export const RS_RESTROOM_TEXTFIELD = "RS_RESTROOM_TEXTFIELD";
+export const RS_ROOM_TEXTFIELD = "RS_ROOM_TEXTFIELD";
+export const RS_LIVING_ROOM_TEXTFIELD = "RS_LIVING_ROOM_TEXTFIELD";
 
 export default function ItemDetailView(props) {
   const {
@@ -16,8 +21,18 @@ export default function ItemDetailView(props) {
     onChangeTextfieldInput,
     onClickSubmit,
     onSelectedCategory,
+    onSelectedListingType,
   } = props;
-  const { area, cost, description, name } = item;
+  const {
+    address,
+    area,
+    cost,
+    description,
+    livingRoom,
+    name,
+    restroom,
+    room,
+  } = item;
   return (
     <ApplicationEditForm
       isCreateView={isCreateView}
@@ -37,6 +52,19 @@ export default function ItemDetailView(props) {
           value={name}
         />
       </Form.Item>
+      <Row>
+        <Col span={24}>
+          <Form.Item label="地址">
+            <Input
+              placeholder="請輸入單位地址"
+              onChange={(event) =>
+                onChangeTextfieldInput(RS_ADDRESS_TEXTFIELD, event)
+              }
+              value={address}
+            />
+          </Form.Item>
+        </Col>
+      </Row>
       <Row justify="space-between">
         <Col span={11}>
           <Form.Item label="大小">
@@ -59,11 +87,56 @@ export default function ItemDetailView(props) {
               value={cost}
             />
           </Form.Item>
+        </Col>
+      </Row>
+      <Row justify="space-between">
+        <Col span={11}>
+          <ListingTypeSelect
+            onSelectedListingType={onSelectedListingType}
+            item={item}
+          />
+        </Col>
+        <Col span={11}>
           <MultipleSelectOption
             categories={categories}
             item={item}
             onSelectedCategory={onSelectedCategory}
           />
+        </Col>
+      </Row>
+      <Row justify="space-between">
+        <Col span={7}>
+          <Form.Item label="房間數">
+            <Input
+              placeholder="請輸入房間數"
+              onChange={(event) =>
+                onChangeTextfieldInput(RS_ROOM_TEXTFIELD, event)
+              }
+              value={room}
+            />
+          </Form.Item>
+        </Col>
+        <Col span={7}>
+          <Form.Item label="廳數">
+            <Input
+              placeholder="請輸入廳數"
+              onChange={(event) =>
+                onChangeTextfieldInput(RS_LIVING_ROOM_TEXTFIELD, event)
+              }
+              value={livingRoom}
+            />
+          </Form.Item>
+        </Col>
+        <Col span={7}>
+          <Form.Item label="衛浴數">
+            <Input
+              placeholder="請輸入衛浴數"
+              onChange={(event) =>
+                onChangeTextfieldInput(RS_RESTROOM_TEXTFIELD, event)
+              }
+              value={restroom}
+            />
+          </Form.Item>
         </Col>
       </Row>
       <Form.Item label="描述">
@@ -79,6 +152,22 @@ export default function ItemDetailView(props) {
         <ApplicationImageUploader />
       </Form.Item>
     </ApplicationEditForm>
+  );
+}
+
+export function ListingTypeSelect({ item, onSelectedListingType }) {
+  const options = [
+    { value: "RENT", label: "出租" },
+    { value: "SELL", label: "買賣" },
+  ];
+  return (
+    <Form.Item label="交易類型">
+      <Select
+        onChange={onSelectedListingType}
+        options={options}
+        value={item?.listingType ?? ""}
+      />
+    </Form.Item>
   );
 }
 
