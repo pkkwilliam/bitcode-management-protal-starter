@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Select } from "antd";
+import { Form, Image, Select } from "antd";
 import ApplicationEditForm from "src/common/ApplicationEditForm";
 import ApplicationImageUploader from "../../../common/ApplicationImageUploader";
 
@@ -9,10 +9,12 @@ export const ITEM_SELECT = { label: "產品", value: "item" };
 export default function CompanyCustomiseImageUploaderView(props) {
   const {
     isCreateView,
+    onAddImage,
     onClickCancel,
     onClickDelete,
     onClickSubmit,
     selectedType,
+    url,
   } = props;
   return (
     <ApplicationEditForm
@@ -23,8 +25,9 @@ export default function CompanyCustomiseImageUploaderView(props) {
       onClickSubmit={onClickSubmit}
       {...props}
     >
+      <Image src={url} />
       <Form.Item label="圖片">
-        <ApplicationImageUploader maxFiles={1} />
+        <ApplicationImageUploader maxFiles={1} onAddImage={onAddImage} />
       </Form.Item>
       <Form.Item label="點擊類型">
         <TypeSelection {...props} />

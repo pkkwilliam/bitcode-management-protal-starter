@@ -11,6 +11,7 @@ export default class CompanyCustomiseMainMenuButton extends CompanyCustomiseImag
   render() {
     return (
       <CompanyCustomiseMainMenuButtonView
+        onAddImage={this.onAddImage}
         onClickCancel={this.onClickCancel}
         onChangeName={this.onChangeName}
         onClickSubmit={this.onClickSubmit}
@@ -19,6 +20,16 @@ export default class CompanyCustomiseMainMenuButton extends CompanyCustomiseImag
         {...this.state}
       />
     );
+  }
+
+  getObjectDetail(index) {
+    const {
+      mainMenuButtons,
+    } = this.appState.companyCustomise.companyCustomiseInfo.landingPage;
+    const buttonObject = mainMenuButtons[index];
+    this.setState({
+      url: buttonObject.url,
+    });
   }
 
   onChangeName = (name) => {

@@ -13,6 +13,7 @@ export const ITEM_SELECT = { label: "產品", value: "item" };
 export default function CompanyCustomiseImageUploaderView(props) {
   const {
     isCreateView,
+    onAddImage,
     onChangeName,
     onClickCancel,
     onClickSubmit,
@@ -28,7 +29,7 @@ export default function CompanyCustomiseImageUploaderView(props) {
       {...props}
     >
       <Form.Item label="圖片">
-        <ApplicationImageUploader maxFiles={1} />
+        <ApplicationImageUploader maxFiles={1} onAddImage={onAddImage} />
       </Form.Item>
       <Form.Item label="按鈕標籤">
         <Input

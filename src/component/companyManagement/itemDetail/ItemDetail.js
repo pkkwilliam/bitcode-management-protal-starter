@@ -28,10 +28,7 @@ export default class ItemDetail extends ApplicationComponent {
       cost: 0,
       description: "",
       features: [],
-      imageUrls: [
-        "https://image.freepik.com/free-vector/investing-money-house_1133-87.jpg",
-        "https://image.freepik.com/free-vector/investing-money-house_1133-87.jpg",
-      ],
+      imageUrls: [],
       listingType: undefined,
       livingRoom: 0,
       name: "",
@@ -73,6 +70,8 @@ export default class ItemDetail extends ApplicationComponent {
         onClickCancel={this.onClickCancel}
         onClickDelete={this.onClickDelete}
         onClickSubmit={this.onClickSubmit}
+        onAddImage={this.onAddImage}
+        onRemoveImage={this.onRemoveImage}
         onSelectedCategory={this.onSelectedCategory}
         onSelectedListingType={this.onSelectedListingType}
         {...this.state}
@@ -193,6 +192,26 @@ export default class ItemDetail extends ApplicationComponent {
         })
         .catch(() => this.onServiceRequestFailed());
     }
+  };
+
+  onAddImage = (newImageUrls) => {
+    this.setState((state) => ({
+      item: {
+        ...state.item,
+        imageUrls: state.item.imageUrls.concat(newImageUrls),
+      },
+    }));
+  };
+
+  onRemoveImage = (index) => {
+    const { imageUrls } = this.state.item;
+    imageUrls.splice(index, 1);
+    this.setState((state) => ({
+      item: {
+        ...state.item,
+        imageUrls,
+      },
+    }));
   };
 
   onSelectedCategory = (categories) => {

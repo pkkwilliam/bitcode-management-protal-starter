@@ -14,8 +14,7 @@ export default class CompanyCustomiseImageUploader extends CompanyCustomise {
     objectSelected: undefined,
     options: [],
     selectedType: undefined,
-    url:
-      "https://image.freepik.com/free-vector/investing-money-house_1133-87.jpg",
+    url: undefined,
   };
 
   componentDidMount() {
@@ -34,12 +33,24 @@ export default class CompanyCustomiseImageUploader extends CompanyCustomise {
         selectedType: type,
       });
       this.onChangeOptionType(type);
+      this.getObjectDetail(index);
     }
+  }
+
+  getObjectDetail(index) {
+    const {
+      carousel,
+    } = this.appState.companyCustomise.companyCustomiseInfo.landingPage;
+    const carouselObject = carousel[index];
+    this.setState({
+      url: carouselObject.url,
+    });
   }
 
   render() {
     return (
       <CompanyCustomiseImageUploaderView
+        onAddImage={this.onAddImage}
         onClickCancel={this.onClickCancel}
         onClickDelete={this.onClickDelete}
         onClickSubmit={this.onClickSubmit}
@@ -49,6 +60,12 @@ export default class CompanyCustomiseImageUploader extends CompanyCustomise {
       />
     );
   }
+
+  onAddImage = (url) => {
+    this.setState({
+      url,
+    });
+  };
 
   onChangeOptionType = (type) => {
     switch (type) {

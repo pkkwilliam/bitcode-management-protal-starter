@@ -1,8 +1,7 @@
 import React from "react";
-import { Button, Col, Form, Input, Row, Select } from "antd";
+import { Col, Form, Input, Row, Select } from "antd";
 import ApplicationEditForm from "src/common/ApplicationEditForm";
-import ApplicationImageUploader from "src/common/ApplicationImageUploader";
-import { CloseCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import ApplicationEditableImageList from "src/common/ApplicationEditableImageList";
 
 export const AREA_TEXTFIELD = "AREA_TEXTFIELD";
 export const COST_TEXTFIELD = "COST_TEXTFIELD";
@@ -20,6 +19,8 @@ export default function ItemDetailView(props) {
     isCreateView,
     onChangeTextfieldInput,
     onClickSubmit,
+    onAddImage,
+    onRemoveImage,
     onSelectedCategory,
     onSelectedListingType,
   } = props;
@@ -28,6 +29,7 @@ export default function ItemDetailView(props) {
     area,
     cost,
     description,
+    imageUrls,
     livingRoom,
     name,
     restroom,
@@ -149,7 +151,11 @@ export default function ItemDetailView(props) {
         />
       </Form.Item>
       <Form.Item label="圖片">
-        <ApplicationImageUploader />
+        <ApplicationEditableImageList
+          imageUrls={imageUrls}
+          onAddImage={onAddImage}
+          onRemoveImage={onRemoveImage}
+        />
       </Form.Item>
     </ApplicationEditForm>
   );
