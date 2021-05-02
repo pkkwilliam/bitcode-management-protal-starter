@@ -84,6 +84,9 @@ const CompanyCustomiseMainMenuButton = React.lazy(() =>
     "./component/companyManagement/companyCustomiseMainMenuButton/companyCustomiseMainMenuButton"
   )
 );
+const IconGenerator = React.lazy(() =>
+  import("./component/companyManagement/iconGenerator/iconGenerator")
+);
 const ItemDetail = React.lazy(() =>
   import("./component/companyManagement/itemDetail/ItemDetail")
 );
@@ -186,6 +189,11 @@ const routes = [
     path: "/company_manager/category_management",
     name: "分類管理",
     component: CategoryManagement,
+  },
+  {
+    path: "/company_manager/icon_generator",
+    name: "圖標生成",
+    component: IconGenerator,
   },
   {
     path: "/company_manager/item_management/item_detail",

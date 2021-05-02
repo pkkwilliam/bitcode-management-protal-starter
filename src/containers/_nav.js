@@ -27,6 +27,12 @@ export const companyManagementNav = [
   },
   {
     _tag: "CSidebarNavItem",
+    name: "圖標生成",
+    to: "/company_manager/icon_generator",
+    icon: "cil-puzzle",
+  },
+  {
+    _tag: "CSidebarNavItem",
     name: "分類管理",
     to: "/company_manager/category_management",
     icon: "cil-puzzle",
