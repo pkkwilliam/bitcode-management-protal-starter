@@ -52,8 +52,10 @@
     "react-scripts": "^4.0.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "REACT_APP_SERVICE_ENV=LOCAL react-scripts start",
+    "start-prod": "REACT_APP_ENV=PROD react-scripts start",
     "build": "react-scripts build",
+    "build-prod": "REACT_APP_ENV=PROD react-scripts build",
     "test": "react-scripts test",
     "test:cov": "npm test -- --coverage --watchAll=false",
     "test:debug": "react-scripts --inspect-brk test --runInBand",

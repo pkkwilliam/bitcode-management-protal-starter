@@ -4,6 +4,7 @@ export const RmmsPortalContext = React.createContext();
 
 export default class RmmsPortalAppState extends Component {
   state = {
+    appContent: { content: { qiniuToken: undefined }, dirty: true },
     category: { categories: [], dirty: true },
     company: { companyInfo: {}, dirty: true },
     companyCustomise: {
@@ -24,6 +25,7 @@ export default class RmmsPortalAppState extends Component {
 
   RmmsPortalAppStateWrapper = ({ children }) => {
     const {
+      appContent,
       category,
       company,
       companyCustomise,
@@ -34,6 +36,10 @@ export default class RmmsPortalAppState extends Component {
     return (
       <RmmsPortalContext.Provider
         value={{
+          appContent: {
+            ...appContent,
+            setAppContent: this.setAppContent,
+          },
           category: {
             ...category,
             setCategories: this.setCategories,
@@ -57,6 +63,16 @@ export default class RmmsPortalAppState extends Component {
         {children}
       </RmmsPortalContext.Provider>
     );
+  };
+
+  // AppContent
+  setAppContent = (content) => {
+    this.setState({
+      appContent: {
+        content,
+        dirty: false,
+      },
+    });
   };
 
   setCategories = (categories) => {

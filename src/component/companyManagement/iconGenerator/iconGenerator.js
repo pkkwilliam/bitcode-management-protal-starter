@@ -10,7 +10,6 @@ import {
   CRow,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
-import { brandSet } from "@coreui/icons";
 
 export default function IconGenerator(props) {
   const [backgroundColor, setbackgroundColor] = useState({
@@ -20,7 +19,11 @@ export default function IconGenerator(props) {
   const [iconLabel, setIconLabel] = useState("圖標名字");
   const [iconColor, setIconColor] = useState("#000000");
   const [iconName, setIconName] = useState("cil-speech");
-  Object.entries(brandSet).map(([name, value]) => console.log(name));
+  const [iconValue, setIconValue] = useState([
+    "32 32",
+    "<path d='M0 0.401v31.197h32v-31.197zM1.333 1.735h2…1-0.172h1.964c0.131 0 0.151 0.068 0.151 0.172z'/>",
+  ]);
+  console.log(iconValue);
   return (
     <CCard>
       <CCardHeader>圖標生成</CCardHeader>

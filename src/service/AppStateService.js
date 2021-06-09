@@ -2,6 +2,7 @@ import {
   GET_CATEGORIES,
   GET_COMPANY,
   GET_COMPANY_CUSTOMISE,
+  GET_GITHUB_CONTENT,
   GET_ITEMS,
 } from "./service";
 
@@ -12,6 +13,22 @@ export default class AppStateService {
   constructor(appState, serviceExecutor) {
     this.appState = appState;
     this.serviceExecutor = serviceExecutor;
+  }
+
+  async getAppContent() {
+    const { appContent } = this.appState;
+    return new Promise((resolve, reject) => {
+      if (appContent.dirty) {
+        this.serviceExecutor
+          .execute(GET_GITHUB_CONTENT("/appContent.json"))
+          .then((content) => {
+            this.appState.appContent.setAppContent(content);
+            return resolve(content);
+          });
+      } else {
+        return resolve(appContent.content);
+      }
+    });
   }
 
   async getCompany() {

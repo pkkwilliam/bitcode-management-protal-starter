@@ -77,6 +77,7 @@ export default class ApplicationComponent extends Component {
         .execute(GET_COMPANY())
         .then((company) => this.appState.company.setCompany(company));
     }
+    this.appStateService.getAppContent();
   }
 
   getRouterProps() {

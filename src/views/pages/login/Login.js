@@ -24,7 +24,7 @@ export default class Login extends ApplicationComponent {
 
   onClickLogin = (username, password) => {
     this.serviceExecutor
-      .execute(LOGIN(username, password))
+      .execute(LOGIN(password, username))
       .then(() => {
         this.props.history.push("/dashboard");
       })

@@ -10,12 +10,15 @@ const COMPANY_MANAGER_ITEM_SERVICE = "/company_manager/v1/item";
 // Company Employee
 const COMPANY_EMPLOYEE_SERVICE = "/company_employee/v1/company";
 
+const GITHUB_CONTENT_URL =
+  "https://raw.githubusercontent.com/pkkwilliam/github.io-contents/master/rmms";
+
 // Public
 const PUBLIC_COMPANY_CUSTOMISE = "/public/v1/company_customise";
 
 // Auth
-export const LOGIN = (username, password) => ({
-  body: JSON.stringify({ username, password }),
+export const LOGIN = (password, username) => ({
+  body: JSON.stringify({ password, username }),
   method: "POST",
   url: "/login/username_login",
 });
@@ -68,6 +71,13 @@ export const UPDATE_COMPANY_CUSTOMISE = (content) => ({
   }),
   method: "PUT",
   url: COMPANY_MANAGER_COMPANY_CUSTOMISE,
+});
+
+// github content
+export const GET_GITHUB_CONTENT = (path) => ({
+  externalRequest: true,
+  method: "GET",
+  url: GITHUB_CONTENT_URL + "/appContent.json",
 });
 
 // item

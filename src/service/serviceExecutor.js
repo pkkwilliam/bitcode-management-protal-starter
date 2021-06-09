@@ -18,17 +18,17 @@ export default class ServiceExecutor {
   }
 
   async execute(service) {
-    const { body, method, url } = service;
+    const { body, externalRequest, method, url } = service;
     return new Promise((resolve, reject) => {
-      fetch(this.host + url, {
+      fetch((externalRequest ? "" : this.host) + url, {
         body,
-        headers: this.requestHeader,
+        headers: externalRequest ? {} : this.requestHeader,
         method,
-        mode: "cors",
+        // mode: externalRequest ? "same-origin" : "cors",
       })
         .then((rawResponse) => {
           // this can only mean that request to the server is success, but not necessary meant that service is sucess, it can be 400, 401...
-          return this.onSuccessServerRequest(rawResponse, resolve, reject);
+          return this.onSuccessServerRequest(rawResponse, resolve, reject, url);
         })
         .catch((exception) => {
           return reject();
@@ -43,7 +43,7 @@ export default class ServiceExecutor {
     }
   }
 
-  onSuccessServerRequest(rawResponse, resolve, reject) {
+  onSuccessServerRequest(rawResponse, resolve, reject, url) {
     const { headers, status } = rawResponse;
     this.checkHeaders(headers);
     switch (status) {
