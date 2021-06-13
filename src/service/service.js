@@ -10,8 +10,12 @@ const COMPANY_MANAGER_ITEM_SERVICE = "/company_manager/v1/item";
 // Company Employee
 const COMPANY_EMPLOYEE_SERVICE = "/company_employee/v1/company";
 
+// GitHub
 const GITHUB_CONTENT_URL =
   "https://raw.githubusercontent.com/pkkwilliam/github.io-contents/master/rmms";
+
+// GitHub
+const IMAGE_UPLOAD_URL = "/company_manager/v1/image_upload_token";
 
 // Public
 const PUBLIC_COMPANY_CUSTOMISE = "/public/v1/company_customise";
@@ -108,6 +112,12 @@ export const UPDATE_ITEMS_SEQUENCES = (items) => ({
   body: JSON.stringify(items),
   method: "PUT",
   url: COMPANY_MANAGER_ITEM_SERVICE + "/update_sequences",
+});
+
+// image upload
+export const GET_IMAGE_UPLOAD_TOKEN = () => ({
+  method: "GET",
+  url: IMAGE_UPLOAD_URL,
 });
 
 // store

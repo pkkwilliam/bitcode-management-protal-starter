@@ -1,9 +1,9 @@
 import Dropzone from "react-dropzone-uploader";
 
 import "react-dropzone-uploader/dist/styles.css";
+import { GET_IMAGE_UPLOAD_TOKEN } from "src/service/service";
 import ApplicationComponent from "./ApplicationComponent";
 
-const FREE_IMAGE_SERVICE_PREPEND_URL = "https://user-assets.sxlcdn.com/";
 export default class ApplicationImageUploader extends ApplicationComponent {
   render() {
     const { onAddImage } = this.props;
@@ -11,7 +11,7 @@ export default class ApplicationImageUploader extends ApplicationComponent {
     return (
       <Dropzone
         getUploadParams={(file, meta) =>
-          getUploadParams(file, meta, qiniuToken)
+          getUploadParams(file, meta, this.serviceExecutor)
         }
         onChangeStatus={handleChangeStatus}
         onSubmit={(files, allFiles) =>
@@ -25,10 +25,13 @@ export default class ApplicationImageUploader extends ApplicationComponent {
   }
 }
 // specify upload params and url for your files
-function getUploadParams(file, meta, token) {
+async function getUploadParams(file, meta, serviceExecutor) {
+  const { token, uploadUrl } = await serviceExecutor.execute(
+    GET_IMAGE_UPLOAD_TOKEN()
+  );
   return {
     methid: "POST",
-    url: "https://upload.qiniup.com/",
+    url: uploadUrl,
     fields: {
       token,
     },
@@ -44,7 +47,8 @@ function handleSubmit(files, allFiles, onAddImage) {
   allFiles.forEach((file, index) => {
     const { xhr } = file;
     let response = JSON.parse(xhr.response);
-    const url = FREE_IMAGE_SERVICE_PREPEND_URL + response.storageKey;
+    const { accessUrl, key } = response;
+    const url = accessUrl + "/" + key;
     imageUrls.push(url);
   });
   onAddImage(imageUrls);
