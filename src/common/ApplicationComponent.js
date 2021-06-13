@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import { RmmsPortalContext } from "../context/contextProvider";
 import AppStateService from "../service/AppStateService";
 import { GET_COMPANY } from "../service/service";
