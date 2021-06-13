@@ -1,6 +1,6 @@
 import React from "react";
-import ApplicationComponent from "src/common/ApplicationComponent";
-import { ITEM_MANAGEMENT } from "src/routes/ApplicationRoutes";
+import ApplicationComponent from "../../../common/ApplicationComponent";
+import { ITEM_MANAGEMENT } from "../../../routes/ApplicationRoutes";
 import {
   CREATE_ITEM,
   DELETE_ITEM,
@@ -95,16 +95,8 @@ export default class ItemDetail extends ApplicationComponent {
 
   onChangeTextfieldInput = (type, event) => {
     let { value } = event.target;
-    let {
-      address,
-      area,
-      cost,
-      description,
-      livingRoom,
-      name,
-      restroom,
-      room,
-    } = this.state.item;
+    let { address, area, cost, description, livingRoom, name, restroom, room } =
+      this.state.item;
     switch (type) {
       case AREA_TEXTFIELD:
         area = value;

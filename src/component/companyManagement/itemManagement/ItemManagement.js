@@ -1,8 +1,8 @@
 import React from "react";
-import ApplicationComponent from "src/common/ApplicationComponent";
+import ApplicationComponent from "../../../common/ApplicationComponent";
 import ItemManagementView from "./ItemManagement.view";
 import { UPDATE_ITEMS_SEQUENCES } from "../../../service/service";
-import { ITEM_DETAIL } from "src/routes/ApplicationRoutes";
+import { ITEM_DETAIL } from "../../../routes/ApplicationRoutes";
 import { generateFirstTimeSortableDataSource } from "../../../common/ApplicationTable";
 
 export default class ItemManagement extends ApplicationComponent {

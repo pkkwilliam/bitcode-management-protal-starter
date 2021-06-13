@@ -5,11 +5,11 @@ import ApplicationTable, {
   COST_COLUMN,
   ITEM_NAME_COLUMN,
   RE_LISTING_TYPE,
-} from "src/common/ApplicationTable";
+} from "../../../common/ApplicationTable";
 import ApplicationEditableTableContainer, {
   EditButtonRow,
   generateEditableColumns,
-} from "src/common/ApplicationEditableTableContainer";
+} from "../../../common/ApplicationEditableTableContainer";
 
 const COLUMNS = [
   ITEM_NAME_COLUMN,

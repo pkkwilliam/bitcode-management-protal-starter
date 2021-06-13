@@ -1,11 +1,11 @@
 import React from "react";
-import ApplicationComponent from "src/common/ApplicationComponent";
+import ApplicationComponent from "../../../common/ApplicationComponent";
 import {
   COMPANY_CUSTOMISE_BOTTOM_LIST,
   COMPANY_CUSTOMISE_IMAGE_UPLOADER,
   COMPANY_CUSTOMISE_MAIN_MENU_BUTTON,
-} from "src/routes/ApplicationRoutes";
-import { UPDATE_COMPANY_CUSTOMISE } from "src/service/service";
+} from "../../../routes/ApplicationRoutes";
+import { UPDATE_COMPANY_CUSTOMISE } from "../../../service/service";
 import CompanyCustomiseView from "./CompanyCustomise.view";
 
 export default class CompanyCustomise extends ApplicationComponent {

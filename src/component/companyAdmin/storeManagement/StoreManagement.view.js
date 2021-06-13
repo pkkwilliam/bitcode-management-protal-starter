@@ -1,5 +1,5 @@
 import React from "react";
-import ApplicationComponentView from "src/common/ApplicationComponentView";
+import ApplicationComponentView from "../../../common/ApplicationComponentView";
 
 export default function StoreManagementView(props) {
   return (

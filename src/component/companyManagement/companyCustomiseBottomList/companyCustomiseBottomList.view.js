@@ -1,11 +1,11 @@
 import React from "react";
 import { Form } from "antd";
-import ApplicationEditForm from "src/common/ApplicationEditForm";
+import ApplicationEditForm from "../../../common/ApplicationEditForm";
 import {
   ObjectGenerate,
   TypeSelection,
 } from "../companyCustomiseImageUploader/CompanyCustomiseImageUploader.view";
-import ApplicationImageUploader from "src/common/ApplicationImageUploader";
+import ApplicationImageUploader from "../../../common/ApplicationImageUploader";
 
 export default function CompanyCustomiseBottomListView(props) {
   const {

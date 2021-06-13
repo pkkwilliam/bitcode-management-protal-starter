@@ -1,6 +1,6 @@
 import React from "react";
-import ApplicationComponent from "src/common/ApplicationComponent";
-import { LOGIN } from "src/service/service";
+import ApplicationComponent from "../../../common/ApplicationComponent";
+import { LOGIN } from "../../../service/service";
 import LoginView from "./Login.view";
 
 export default class Login extends ApplicationComponent {

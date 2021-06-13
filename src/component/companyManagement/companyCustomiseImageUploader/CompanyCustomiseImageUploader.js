@@ -1,5 +1,5 @@
 import React from "react";
-import { COMPANY_CUSTOMISE } from "src/routes/ApplicationRoutes";
+import { COMPANY_CUSTOMISE } from "../../../routes/ApplicationRoutes";
 import CompanyCustomise from "../companyCustomise/CompanyCustomise";
 import CompanyCustomiseImageUploaderView, {
   CATEGORY_SELECT,
@@ -38,9 +38,8 @@ export default class CompanyCustomiseImageUploader extends CompanyCustomise {
   }
 
   getObjectDetail(index) {
-    const {
-      carousel,
-    } = this.appState.companyCustomise.companyCustomiseInfo.landingPage;
+    const { carousel } =
+      this.appState.companyCustomise.companyCustomiseInfo.landingPage;
     const carouselObject = carousel[index];
     this.setState({
       url: carouselObject.url,
@@ -171,13 +170,8 @@ export default class CompanyCustomiseImageUploader extends CompanyCustomise {
   }
   // TODO clean this shit
   pushNewImageToCarousel() {
-    const {
-      companyCustomise,
-      objectSelected,
-      options,
-      selectedType,
-      url,
-    } = this.state;
+    const { companyCustomise, objectSelected, options, selectedType, url } =
+      this.state;
     const { carousel } = companyCustomise.landingPage;
     const selectedOption = options.find(
       (option) => option.id === objectSelected

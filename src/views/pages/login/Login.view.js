@@ -14,7 +14,7 @@ import {
   CRow,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
-import ApplicationComponentView from "src/common/ApplicationComponentView";
+import ApplicationComponentView from "../../../common/ApplicationComponentView";
 
 export default function LoginView(props) {
   const [password, setPassword] = useState("");

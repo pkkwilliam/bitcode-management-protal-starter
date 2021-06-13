@@ -1,8 +1,8 @@
 import { Component } from "react";
-import { RmmsPortalContext } from "src/context/contextProvider";
-import AppStateService from "src/service/AppStateService";
-import { GET_COMPANY } from "src/service/service";
-import ServiceExecutor from "src/service/serviceExecutor";
+import { RmmsPortalContext } from "../context/contextProvider";
+import AppStateService from "../service/AppStateService";
+import { GET_COMPANY } from "../service/service";
+import ServiceExecutor from "../service/serviceExecutor";
 import ApplicationContext from "./ApplicationContext";
 import ApplicationStorage from "./ApplicationStorage";
 

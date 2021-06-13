@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Input } from "antd";
-import ApplicationEditForm from "src/common/ApplicationEditForm";
+import ApplicationEditForm from "../../../common/ApplicationEditForm";
 import ApplicationImageUploader from "../../../common/ApplicationImageUploader";
 import {
   ObjectGenerate,

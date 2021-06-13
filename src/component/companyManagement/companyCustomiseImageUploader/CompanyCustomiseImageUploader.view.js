@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Image, Select } from "antd";
-import ApplicationEditForm from "src/common/ApplicationEditForm";
+import ApplicationEditForm from "../../../common/ApplicationEditForm";
 import ApplicationImageUploader from "../../../common/ApplicationImageUploader";
 
 export const CATEGORY_SELECT = { label: "分類", value: "category" };

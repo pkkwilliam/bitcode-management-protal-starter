@@ -1,6 +1,6 @@
 import React from "react";
-import ApplicationComponent from "src/common/ApplicationComponent";
-import { CATEGORY_MANAGEMENT } from "src/routes/ApplicationRoutes";
+import ApplicationComponent from "../../../common/ApplicationComponent";
+import { CATEGORY_MANAGEMENT } from "../../../routes/ApplicationRoutes";
 import CategoryDetailView from "./CategoryDetail.view";
 import {
   CREATE_CATEGORY,

@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Form, Input, Row, Select } from "antd";
-import ApplicationEditForm from "src/common/ApplicationEditForm";
-import ApplicationEditableImageList from "src/common/ApplicationEditableImageList";
+import ApplicationEditForm from "../../../common/ApplicationEditForm";
+import ApplicationEditableImageList from "../../../common/ApplicationEditableImageList";
 
 export const AREA_TEXTFIELD = "AREA_TEXTFIELD";
 export const COST_TEXTFIELD = "COST_TEXTFIELD";

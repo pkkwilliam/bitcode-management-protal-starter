@@ -1,7 +1,7 @@
 import React from "react";
-import ApplicationComponent from "src/common/ApplicationComponent";
-import { CATEGORY_DETAIL } from "src/routes/ApplicationRoutes";
-import { UPDATE_CATEGORIES_SEQUENCES } from "src/service/service";
+import ApplicationComponent from "../../../common/ApplicationComponent";
+import { CATEGORY_DETAIL } from "../../../routes/ApplicationRoutes";
+import { UPDATE_CATEGORIES_SEQUENCES } from "../../../service/service";
 import CategoryManagementView from "./CategoryManagement.view";
 import { generateFirstTimeSortableDataSource } from "../../../common/ApplicationTable";
 

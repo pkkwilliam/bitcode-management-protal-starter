@@ -1,17 +1,17 @@
 import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 import React from "react";
-import ApplicationLoadableButton from "src/common/ApplicationLoadableButton";
+import ApplicationLoadableButton from "../../../common/ApplicationLoadableButton";
 import ApplicationComponentView from "../../../common/ApplicationComponentView";
 import { Col, Form, Input, Row } from "antd";
 import ApplicationTable, {
   IMAGE_COLUMN,
   ITEM_NAME_COLUMN,
   TYPE_COLUMN,
-} from "src/common/ApplicationTable";
+} from "../../../common/ApplicationTable";
 import ApplicationEditableTableContainer, {
   EditButtonRow,
   generateEditableColumns,
-} from "src/common/ApplicationEditableTableContainer";
+} from "../../../common/ApplicationEditableTableContainer";
 
 const BOTTOM_LIST_COLUMN = [TYPE_COLUMN];
 const CAROUSEL_COLUMNS = [IMAGE_COLUMN, ITEM_NAME_COLUMN, TYPE_COLUMN];
@@ -48,11 +48,8 @@ function LandingPageBottomList(props) {
 }
 
 function LandingPageCarousel(props) {
-  let {
-    companyCustomise,
-    onClickAddCarouselImage,
-    onClickEditCarouselImage,
-  } = props;
+  let { companyCustomise, onClickAddCarouselImage, onClickEditCarouselImage } =
+    props;
   let { carousel } = companyCustomise.landingPage;
 
   return (

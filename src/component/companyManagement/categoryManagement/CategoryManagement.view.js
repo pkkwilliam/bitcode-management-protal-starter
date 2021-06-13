@@ -2,21 +2,17 @@ import React from "react";
 import ApplicationTable, {
   CATEGORY_COLUMN,
   ID_COLUMN,
-} from "src/common/ApplicationTable";
+} from "../../../common/ApplicationTable";
 import ApplicationEditableTableContainer, {
   EditButtonRow,
   generateEditableColumns,
-} from "src/common/ApplicationEditableTableContainer";
+} from "../../../common/ApplicationEditableTableContainer";
 
 const COLUMNS = [CATEGORY_COLUMN, ID_COLUMN];
 
 export default function CategoryManagementView(props) {
-  const {
-    categories,
-    onClickAddRow,
-    onClickRowEdit,
-    setCategoriesState,
-  } = props;
+  const { categories, onClickAddRow, onClickRowEdit, setCategoriesState } =
+    props;
   return (
     <ApplicationEditableTableContainer header={"分類管理"} {...props}>
       <EditButtonRow onClickAdd={onClickAddRow} />
