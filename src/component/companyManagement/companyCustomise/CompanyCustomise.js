@@ -20,8 +20,7 @@ export default class CompanyCustomise extends ApplicationComponent {
     },
   };
 
-  componentDidMount() {
-    super.componentDidMount();
+  componentInitService() {
     this.appStateService
       .getCompanyCustomise()
       .then((companyCustomise) => this.setState({ companyCustomise }));

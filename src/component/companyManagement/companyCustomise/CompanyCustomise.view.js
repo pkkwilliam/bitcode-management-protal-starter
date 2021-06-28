@@ -93,7 +93,7 @@ function Theme(props) {
   let { style } = companyCustomise;
   return (
     <SectionSubmitionCard
-      header="公司主題"
+      header="公司主題色調"
       onClickSubmit={onClickUpdateCompanyCustomise}
       {...props}
     >

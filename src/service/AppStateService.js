@@ -24,7 +24,8 @@ export default class AppStateService {
           .then((content) => {
             this.appState.appContent.setAppContent(content);
             return resolve(content);
-          });
+          })
+          .catch((ex) => reject(ex));
       } else {
         return resolve(appContent.content);
       }

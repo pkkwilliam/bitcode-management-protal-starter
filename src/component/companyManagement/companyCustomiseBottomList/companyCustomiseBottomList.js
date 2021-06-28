@@ -10,6 +10,7 @@ export default class CompanyCustomiseBottomList extends CompanyCustomiseImageUpl
   render() {
     return (
       <CompanyCustomiseBottomListView
+        onAddImage={this.onAddImage}
         onClickCancel={this.onClickCancel}
         onClickDelete={this.onClickDelete}
         onClickSubmit={this.onClickSubmit}
@@ -18,6 +19,26 @@ export default class CompanyCustomiseBottomList extends CompanyCustomiseImageUpl
         {...this.state}
       />
     );
+  }
+
+  addObjectIntoCurrentCompanyCustomise() {
+    const { companyCustomise, objectSelected, options, selectedType, url } =
+      this.state;
+    const { bottomList } = companyCustomise.landingPage;
+    const selectedOption = options.find(
+      (option) => option.id === objectSelected
+    );
+    const companyCustomiseImage = {
+      id: objectSelected,
+      name: selectedOption.name,
+      type: selectedType,
+      url,
+    };
+    bottomList.push(companyCustomiseImage);
+    companyCustomise.landingPage.bottomList = bottomList;
+    this.setState({
+      companyCustomise,
+    });
   }
 
   updateObjectInCurrentCompanyCustomise() {

@@ -33,9 +33,10 @@ export default class ApplicationComponent extends Component {
     );
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.validateUserPermission();
-    this.initService();
+    this.componentInitService();
+    this.appStateService.getAppContent().catch((ex) => ex);
   }
 
   get appContext() {
@@ -70,14 +71,10 @@ export default class ApplicationComponent extends Component {
     }));
   }
 
-  initService() {
-    const { dirty } = this.appState.company;
-    if (dirty) {
-      this.serviceExecutor
-        .execute(GET_COMPANY())
-        .then((company) => this.appState.company.setCompany(company));
-    }
-    this.appStateService.getAppContent();
+  componentInitService() {
+    console.debug(
+      "componentInitService: please override this in the component if there is service request after parent componentDidMount()"
+    );
   }
 
   getRouterProps() {

@@ -10,6 +10,7 @@ import ApplicationImageUploader from "../../../common/ApplicationImageUploader";
 export default function CompanyCustomiseBottomListView(props) {
   const {
     isCreateView,
+    onAddImage,
     onClickCancel,
     onClickDelete,
     onClickSubmit,
@@ -25,10 +26,10 @@ export default function CompanyCustomiseBottomListView(props) {
       {...props}
     >
       <Form.Item label="圖片">
-        <ApplicationImageUploader maxFiles={1} />
+        <ApplicationImageUploader maxFiles={1} onAddImage={onAddImage} />
       </Form.Item>
       <Form.Item label="點擊類型">
-        <TypeSelection disabled {...props} />
+        <TypeSelection {...props} />
       </Form.Item>
       <Form.Item label="點擊後轉到">
         <ObjectGenerate {...props} />
